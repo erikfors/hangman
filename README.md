@@ -24,6 +24,7 @@
 - [ ] Add extra difficult adding a timer
 - [ ] Add full sentences as another game mode
 - [ ] Different language mode
+- [ ] Add music and effects
 
 ### App Walkthough GIF
 
