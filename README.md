@@ -5,7 +5,7 @@
 #### REQUIRED
 
 - [ ] Hangman functionaliy
-- [ ] Show figure
+- [x] Show figure
 - [ ] Add new body part when user miss the letter
 - [ ] Highlight letters selected
 - [ ] Get random word each round
