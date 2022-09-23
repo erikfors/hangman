@@ -26,6 +26,7 @@
 - [ ] Different language mode
 - [ ] Add music and effects
 - [ ] Monetize it
+- [ ] Put in play store, and apple if cheap, hosted on a website
 
 ### App Walkthough GIF
 
