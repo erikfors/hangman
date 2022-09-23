@@ -14,7 +14,7 @@
 
 - [ ] Add definition of word after each round
 - [ ] Track score every time gets a word right
-- [ ] Use Bloc.
+- [x] Use Bloc.
 - [ ] Save highest record
 - [ ] List of all past games with words and definitions
 - [ ] Improved the user interface by experimenting with styling and coloring.
@@ -24,6 +24,9 @@
 - [ ] Add extra difficult adding a timer
 - [ ] Add full sentences as another game mode
 - [ ] Different language mode
+- [ ] Add music and effects
+- [ ] Monetize it
+- [ ] Put in play store, and apple if cheap, hosted on a website
 
 ### App Walkthough GIF
 
