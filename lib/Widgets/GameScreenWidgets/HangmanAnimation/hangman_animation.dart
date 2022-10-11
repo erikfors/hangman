@@ -41,7 +41,7 @@ class _HangmanAnimationState extends State<HangmanAnimation> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 500,
+      height: 250,
       child: _hangmanArtboard == null
           ? const SizedBox()
           : BlocBuilder<HangmanAnimationBloc, HangmanAnimationState>(
