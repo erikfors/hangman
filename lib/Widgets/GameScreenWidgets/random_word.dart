@@ -7,18 +7,21 @@ class RandomWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: word.length,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => Row(
-          children: [
-            WordWidget(word[index], false),
-            const SizedBox(width: 10)
-          ],
-        ),
-      ),
+    return Wrap(
+      alignment: WrapAlignment.center,
+      children: [
+        ...word.characters
+            .map((character) => SizedBox(
+              width: 35,
+              height: 35,
+              child: Row(
+                    children: [
+                      WordWidget(character, false),
+                    ],
+                  ),
+            ))
+            .toList()
+      ],
     );
   }
 }
@@ -31,8 +34,8 @@ class WordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
-      width: 20,
+      height: 25,
+      width: 25,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         border: Border.all(width: 1, color: Colors.black),
@@ -41,10 +44,10 @@ class WordWidget extends StatelessWidget {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            show ? "$letter " : "",
+            show ? "$letter " : "X",
             textAlign: TextAlign.center,
           ),
         ],
