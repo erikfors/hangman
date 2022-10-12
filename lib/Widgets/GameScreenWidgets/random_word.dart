@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../Providers/GameHangman/bloc/game_hangman_bloc.dart';
 
 class RandomWord extends StatelessWidget {
   final String word;
@@ -7,21 +10,47 @@ class RandomWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: [
-        ...word.characters
-            .map((character) => SizedBox(
-              width: 35,
-              height: 35,
-              child: Row(
-                    children: [
-                      WordWidget(character, false),
-                    ],
-                  ),
-            ))
-            .toList()
-      ],
+    return BlocBuilder<GameHangmanBloc, GameHangmanState>(
+      builder: (context, state) {
+        switch (state.status) {
+          case GameHangmanStatus.initial:
+            return Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                ...word.characters
+                    .map(
+                      (character) => const SizedBox(
+                          width: 35,
+                          height: 35,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          )),
+                    )
+                    .toList()
+              ],
+            );
+
+          case GameHangmanStatus.playing:
+            return Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                ...word.characters
+                    .map((character) => SizedBox(
+                          width: 35,
+                          height: 35,
+                          child: Row(
+                            children: [
+                              WordWidget(character, true),
+                            ],
+                          ),
+                        ))
+                    .toList()
+              ],
+            );
+          case GameHangmanStatus.over:
+            return const Center(child: Text("Over"));
+        }
+      },
     );
   }
 }
@@ -47,7 +76,7 @@ class WordWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            show ? "$letter " : "X",
+            show ? "$letter " : "",
             textAlign: TextAlign.center,
           ),
         ],
