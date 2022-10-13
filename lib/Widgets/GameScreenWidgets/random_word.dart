@@ -40,7 +40,13 @@ class RandomWord extends StatelessWidget {
                           height: 35,
                           child: Row(
                             children: [
-                              WordWidget(character, true),
+                              WordWidget(
+                                character.toUpperCase(),
+                                checkLetter(
+                                  state.lettersPlayed,
+                                  character.toUpperCase(),
+                                ),
+                              ),
                             ],
                           ),
                         ))
@@ -53,6 +59,10 @@ class RandomWord extends StatelessWidget {
       },
     );
   }
+}
+
+bool checkLetter(List<String> lettersplayed, String character) {
+  return lettersplayed.contains(character);
 }
 
 class WordWidget extends StatelessWidget {
