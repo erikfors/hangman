@@ -4,11 +4,11 @@
 
 #### REQUIRED
 
-- [ ] Hangman functionaliy
+- [x] Hangman functionaliy
 - [x] Show figure
-- [ ] Add new body part when user miss the letter
-- [ ] Highlight letters selected
-- [ ] Get random word each round
+- [x] Add new body part when user miss the letter
+- [x] Highlight letters selected
+- [x] Get random word each round
 
 #### BONUS
 
@@ -19,7 +19,7 @@
 - [ ] List of all past games with words and definitions
 - [ ] Improved the user interface by experimenting with styling and coloring.
 - [ ] Improved hangman design.
-- [ ] Highlight green when good letter, red when a bad letter
+- [x] Highlight green when good letter, red when a bad letter
 - [ ] Show history of game with words and their definitions
 - [ ] Add extra difficult adding a timer
 - [ ] Add full sentences as another game mode
