@@ -30,53 +30,61 @@ class GameScreenBody extends StatelessWidget {
       ],
       child: BlocBuilder<HangmanAnimationBloc, HangmanAnimationState>(
         builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                width: double.infinity,
-                child: Text(
-                  "Score: 18",
-                  textAlign: TextAlign.end,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const HangmanAnimation(),
-              const Text("6 lives left"),
-              const SizedBox(
-                height: 30,
-              ),
-              BlocBuilder<RandomWordsBloc, RandomWordsState>(
-                builder: (context, state) {
-                  switch (state.status) {
-                    case RandomWordsStatus.initial:
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    case RandomWordsStatus.success:
-                      context
-                          .read<GameHangmanBloc>()
-                          .add(GameHangmanGameStarted(choosenWord: state.word));
-                      return RandomWord(state.word);
-                    case RandomWordsStatus.failure:
-                      return const Text("Failed to get word");
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GameKeyboard(Alphabet.includeAll()),
-              // ElevatedButton(
-              //     onPressed: () {
-              //       context
-              //           .read<HangmanAnimationBloc>()
-              //           .add(HangmanAnimationStarted());
-              //     },
-              //     child: const Text("Trigger"))
-            ],
+          return BlocBuilder<GameHangmanBloc, GameHangmanState>(
+            builder: (context, state) {
+              if ((state.status == GameHangmanStatus.playing &&
+                      !state.lastPlayGood) ||
+                  state.status == GameHangmanStatus.over) {
+                context
+                    .read<HangmanAnimationBloc>()
+                    .add(HangmanAnimationStarted());
+              }
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      "Score: 0 (To Do)",
+                      textAlign: TextAlign.end,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const HangmanAnimation(),
+                  Text("${state.lives} lives left"),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  BlocBuilder<RandomWordsBloc, RandomWordsState>(
+                    builder: (context, state) {
+                      switch (state.status) {
+                        case RandomWordsStatus.initial:
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        case RandomWordsStatus.success:
+                          context.read<GameHangmanBloc>().add(
+                              GameHangmanGameStarted(choosenWord: state.word));
+                          return RandomWord(state.word);
+                        case RandomWordsStatus.failure:
+                          return const Text("Failed to get word");
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  GameKeyboard(
+                    Alphabet.includeAll(),
+                    state.lettersPlayed,
+                    state.word,
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
