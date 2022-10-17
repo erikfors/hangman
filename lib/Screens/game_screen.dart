@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hangman/Providers/RandomWordsProvider/bloc/random_words_bloc.dart';
-import 'package:hangman/Widgets/GameScreenWidgets/game_screen_body.dart';
+
+import '../Widgets/GameScreenWidgets/PlayGameScreen/game_screen_body.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -17,10 +18,10 @@ class GameScreen extends StatelessWidget {
           ..add(
             RandomWordFetched(),
           )),
-          child:  Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: GameScreenBody(),
-          ),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: GameScreenBody(),
+        ),
       ),
     );
   }

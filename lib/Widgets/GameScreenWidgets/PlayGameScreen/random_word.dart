@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Providers/GameHangman/bloc/game_hangman_bloc.dart';
+import '../../../Providers/GameHangman/bloc/game_hangman_bloc.dart';
 
 class RandomWord extends StatelessWidget {
   final String word;
