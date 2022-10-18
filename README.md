@@ -13,7 +13,7 @@
 #### BONUS
 
 - [ ] Add definition of word after each round
-- [ ] Track score every time gets a word right
+- [x] Track score every time gets a word right
 - [x] Use Bloc.
 - [ ] Save highest record
 - [ ] List of all past games with words and definitions
