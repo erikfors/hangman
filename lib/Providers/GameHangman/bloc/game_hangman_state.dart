@@ -10,6 +10,8 @@ class GameHangmanState extends Equatable {
   final int needToWin;
   final bool gameWon;
   final bool lastPlayGood;
+  final int currentScore;
+  final int totalScore;
 
   const GameHangmanState({
     this.status = GameHangmanStatus.initial,
@@ -19,6 +21,8 @@ class GameHangmanState extends Equatable {
     this.needToWin = 0,
     this.gameWon = false,
     this.lastPlayGood = false,
+    this.currentScore = 0,
+    this.totalScore = 0,
   });
 
   GameHangmanState copyWith({
@@ -29,6 +33,8 @@ class GameHangmanState extends Equatable {
     int? needToWin,
     bool? gameWon,
     bool? lastPlayGood,
+    int? currentScore,
+    int? totalScore,
   }) {
     return GameHangmanState(
         status: status ?? this.status,
@@ -37,17 +43,28 @@ class GameHangmanState extends Equatable {
         lives: lives ?? this.lives,
         needToWin: needToWin ?? this.needToWin,
         gameWon: gameWon ?? this.gameWon,
-        lastPlayGood: lastPlayGood ?? this.lastPlayGood);
+        lastPlayGood: lastPlayGood ?? this.lastPlayGood,
+        currentScore: currentScore ?? this.currentScore,
+        totalScore: totalScore ?? this.totalScore);
   }
 
   @override
   String toString() {
-    return '''GameHangmanState { status: $status, lettersPlayed: ${lettersPlayed.toString()}, Word: $word, LiveLeft: $lives,Found: $needToWin, LastPlayAccert: $lastPlayGood, GameWon?: $gameWon}''';
+    return '''GameHangmanState { Status: $status, LettersPlayed: ${lettersPlayed.toString()}, Word: $word, LiveLeft: $lives,Found: $needToWin, LastPlayAccert: $lastPlayGood, GameWon?: $gameWon, CurrentPoints: $currentScore, TotalPoints: $totalScore}''';
   }
 
   @override
-  List<Object> get props =>
-      [status, lettersPlayed, word, lives, needToWin, gameWon, lastPlayGood];
+  List<Object> get props => [
+        status,
+        lettersPlayed,
+        word,
+        lives,
+        needToWin,
+        gameWon,
+        lastPlayGood,
+        currentScore,
+        totalScore,
+      ];
 }
 
 class GameHangmanInitial extends GameHangmanState {}

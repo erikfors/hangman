@@ -10,10 +10,10 @@ class MainOverScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           child: Text(
-            "Total Score: 0 (To Do)",
+            "Total Score: ${gameState.totalScore}",
             textAlign: TextAlign.end,
           ),
         ),
@@ -41,7 +41,7 @@ class MainOverScreen extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        gameState.gameWon
+        !gameState.gameWon
             ? ElevatedButton(
                 onPressed: () {},
                 child: const Text("Try Again"),
@@ -55,7 +55,9 @@ class MainOverScreen extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {},
-          child: Text(gameState.gameWon ? "Exit" : "Save and Exit"),
+          child: Text(
+            !gameState.gameWon ? "Exit" : "Save and Exit",
+          ),
         ),
       ],
     );

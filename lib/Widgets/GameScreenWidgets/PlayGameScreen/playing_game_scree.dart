@@ -20,10 +20,10 @@ class PlayingGameWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           child: Text(
-            "Score: 0 (To Do)",
+            "Score: ${state.currentScore}",
             textAlign: TextAlign.end,
           ),
         ),
