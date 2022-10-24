@@ -12,7 +12,7 @@
 
 #### BONUS
 
-- [ ] Add definition of word after each round
+- [x] Add definition of word after each round
 - [x] Track score every time gets a word right
 - [x] Use Bloc.
 - [ ] Save highest record
