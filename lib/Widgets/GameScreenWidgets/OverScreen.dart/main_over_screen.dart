@@ -10,7 +10,10 @@ class MainOverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WordDefinitionBloc(gameState.word)..add(WordDefinitionFetched(),),
+      create: (context) => WordDefinitionBloc(gameState.word)
+        ..add(
+          WordDefinitionFetched(),
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,9 +50,15 @@ class MainOverScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyLarge,
                   );
                 case WordDefinitionStatus.success:
-                  return Text(
-                    state.definitions[0],
-                    style: Theme.of(context).textTheme.bodyLarge,
+                  List<Widget> definitionsWidgets = [];
+                  for (int i = 1; i <= state.definitions.length; i++) {
+                    definitionsWidgets.add(Text("$i- ${state.definitions[i-1]}"));
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...definitionsWidgets,
+                    ],
                   );
                 case WordDefinitionStatus.failure:
                   return Text(
