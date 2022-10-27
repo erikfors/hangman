@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hangman/Models/alphabet.dart';
 import 'package:hangman/Providers/GameHangman/bloc/game_hangman_bloc.dart';
 import 'package:hangman/Providers/HangmanAnimationProvider/bloc/hangman_animation_bloc.dart';
-import 'package:hangman/Providers/RandomWordsProvider/bloc/random_words_bloc.dart';
-import 'package:hangman/Widgets/GameScreenWidgets/HangmanAnimation/hangman_animation.dart';
 import 'package:hangman/Widgets/GameScreenWidgets/OverScreen.dart/main_over_screen.dart';
 import 'package:hangman/Widgets/GameScreenWidgets/PlayGameScreen/keyboard.dart';
 import 'package:hangman/Widgets/GameScreenWidgets/PlayGameScreen/playing_game_scree.dart';
@@ -23,10 +21,7 @@ class GameScreenBody extends StatelessWidget {
             ),
         ),
         BlocProvider(
-          create: (_) => RandomWordsBloc()..add(RandomWordFetched()),
-        ),
-        BlocProvider(
-          create: (_) => GameHangmanBloc(),
+          create: (_) => GameHangmanBloc()..add(const GameHangmanGameStarted()),
         ),
       ],
       child: BlocBuilder<HangmanAnimationBloc, HangmanAnimationState>(
@@ -44,7 +39,18 @@ class GameScreenBody extends StatelessWidget {
                 case GameHangmanStatus.initial:
                   return PlayingGameWidget(state);
                 case GameHangmanStatus.playing:
-                  return PlayingGameWidget(state);
+                  if (state.lives > 0 || state.gameWon) {
+                    return PlayingGameWidget(state);
+                  } else {
+                    Future.delayed(
+                      const Duration(seconds: 2),
+                      (() => context.read<GameHangmanBloc>().add(
+                            GameHangmanGameOver(),
+                          )),
+                    );
+
+                    return PlayingGameWidget(state);
+                  }
                 case GameHangmanStatus.over:
                   return MainOverScreen(state);
                 default:

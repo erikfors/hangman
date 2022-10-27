@@ -7,12 +7,17 @@ abstract class GameHangmanEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GameHangmanGameStarted extends GameHangmanEvent{
-  final String choosenWord;
-  const GameHangmanGameStarted({required this.choosenWord});
+class GameHangmanGameStarted extends GameHangmanEvent {
+  const GameHangmanGameStarted();
 }
 
-class GameHangmanPlayLetter extends GameHangmanEvent{
+class GameHangmanPlayLetter extends GameHangmanEvent {
   final String letterPlayed;
   const GameHangmanPlayLetter({required this.letterPlayed});
+}
+
+class GameHangmanGameOver extends GameHangmanEvent {}
+
+class GameHangmanGameContinue extends GameHangmanEvent {
+  const GameHangmanGameContinue();
 }

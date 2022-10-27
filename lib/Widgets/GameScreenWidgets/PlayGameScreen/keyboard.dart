@@ -9,7 +9,9 @@ class GameKeyboard extends StatelessWidget {
   final Alphabet letters;
   final List<String> lettersplayed;
   final String word;
-  const GameKeyboard(this.letters, this.lettersplayed, this.word, {super.key});
+  final bool active;
+  const GameKeyboard(this.letters, this.lettersplayed, this.word,
+      {super.key, this.active = true});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +39,14 @@ class GameKeyboard extends StatelessWidget {
               }
             }
 
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: KeyboardKey(
-                letter: letterString,
-                state: state,
+            return AbsorbPointer(
+              absorbing: !active,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: KeyboardKey(
+                  letter: letterString,
+                  state: state,
+                ),
               ),
             );
           },

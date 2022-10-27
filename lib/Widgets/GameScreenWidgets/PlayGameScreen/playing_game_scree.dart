@@ -4,7 +4,6 @@ import 'package:hangman/Widgets/GameScreenWidgets/PlayGameScreen/random_word.dar
 
 import '../../../Models/alphabet.dart';
 import '../../../Providers/GameHangman/bloc/game_hangman_bloc.dart';
-import '../../../Providers/RandomWordsProvider/bloc/random_words_bloc.dart';
 import '../HangmanAnimation/hangman_animation.dart';
 import 'keyboard.dart';
 
@@ -17,6 +16,7 @@ class PlayingGameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -35,23 +35,20 @@ class PlayingGameWidget extends StatelessWidget {
         const SizedBox(
           height: 30,
         ),
-        BlocBuilder<RandomWordsBloc, RandomWordsState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case RandomWordsStatus.initial:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              case RandomWordsStatus.success:
-                context
-                    .read<GameHangmanBloc>()
-                    .add(GameHangmanGameStarted(choosenWord: state.word));
-                return RandomWord(state.word);
-              case RandomWordsStatus.failure:
-                return const Text("Failed to get word");
-            }
-          },
-        ),
+        state.status == GameHangmanStatus.playing
+            ? RandomWord(state.word)
+            : Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("Looking for a juicy word! "),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircularProgressIndicator(),
+                  ],
+                ),
+              ),
         const SizedBox(
           height: 30,
         ),
@@ -59,6 +56,7 @@ class PlayingGameWidget extends StatelessWidget {
           Alphabet.includeAll(),
           state.lettersPlayed,
           state.word,
+          active: state.status == GameHangmanStatus.playing ? true : false,
         ),
       ],
     );

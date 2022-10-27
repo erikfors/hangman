@@ -35,17 +35,19 @@ class GameHangmanState extends Equatable {
     bool? lastPlayGood,
     int? currentScore,
     int? totalScore,
+    String? lastPlayTime,
   }) {
     return GameHangmanState(
-        status: status ?? this.status,
-        lettersPlayed: lettersPlayed ?? this.lettersPlayed,
-        word: word ?? this.word,
-        lives: lives ?? this.lives,
-        needToWin: needToWin ?? this.needToWin,
-        gameWon: gameWon ?? this.gameWon,
-        lastPlayGood: lastPlayGood ?? this.lastPlayGood,
-        currentScore: currentScore ?? this.currentScore,
-        totalScore: totalScore ?? this.totalScore);
+      status: status ?? this.status,
+      lettersPlayed: lettersPlayed ?? this.lettersPlayed,
+      word: word ?? this.word,
+      lives: lives ?? this.lives,
+      needToWin: needToWin ?? this.needToWin,
+      gameWon: gameWon ?? this.gameWon,
+      lastPlayGood: lastPlayGood ?? this.lastPlayGood,
+      currentScore: currentScore ?? this.currentScore,
+      totalScore: totalScore ?? this.totalScore,
+    );
   }
 
   @override

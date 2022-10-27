@@ -1,6 +1,8 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hangman/Providers/GameHangman/bloc/game_hangman_bloc.dart';
+import 'package:hangman/Providers/HangmanAnimationProvider/bloc/hangman_animation_bloc.dart';
 import 'package:hangman/Providers/WordDefinitionProvider/bloc/word_definition_bloc.dart';
 
 class MainOverScreen extends StatelessWidget {
@@ -52,7 +54,8 @@ class MainOverScreen extends StatelessWidget {
                 case WordDefinitionStatus.success:
                   List<Widget> definitionsWidgets = [];
                   for (int i = 1; i <= state.definitions.length; i++) {
-                    definitionsWidgets.add(Text("$i- ${state.definitions[i-1]}"));
+                    definitionsWidgets
+                        .add(Text("$i- ${state.definitions[i - 1]}"));
                   }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,18 +76,35 @@ class MainOverScreen extends StatelessWidget {
           ),
           !gameState.gameWon
               ? ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO save game
+
+                    //TODO start game over
+                    context
+                        .read<GameHangmanBloc>()
+                        .add(const GameHangmanGameStarted());
+                    context
+                        .read<HangmanAnimationBloc>()
+                        .add(HangmanAnimationStarted());
+                  },
                   child: const Text("Try Again"),
                 )
               : ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO save first
+
+                    //TODO start with another word
+                  },
                   child: const Text("Next Word!"),
                 ),
           const SizedBox(
             height: 10,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              //TODO Do the saving part
+              Beamer.of(context).beamBack();
+            },
             child: Text(
               !gameState.gameWon ? "Exit" : "Save and Exit",
             ),

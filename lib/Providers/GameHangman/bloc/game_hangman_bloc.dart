@@ -1,21 +1,44 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:bloc_event_transformers/bloc_event_transformers.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../Logic/Requests/random_word_request.dart';
 
 part 'game_hangman_event.dart';
 part 'game_hangman_state.dart';
 
+const throttleDuration = Duration(seconds: 1);
+
 class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
   GameHangmanBloc() : super(GameHangmanInitial()) {
     on<GameHangmanGameStarted>(_onGameHangmanGameStarted);
-    on<GameHangmanPlayLetter>(_onGameHangmanPlayLetter);
+    on<GameHangmanPlayLetter>(_onGameHangmanPlayLetter,
+        transformer: throttle(throttleDuration));
+    on<GameHangmanGameOver>(_onGameHangmanOver);
   }
 
   void _onGameHangmanGameStarted(
-      GameHangmanGameStarted event, Emitter<GameHangmanState> emit) {
+      GameHangmanGameStarted event, Emitter<GameHangmanState> emit) async {
+    final randomWord = await RandomWordRequest.getRandomWord();
+
     if (state.status == GameHangmanStatus.initial) {
       return emit(state.copyWith(
+          status: GameHangmanStatus.playing, word: randomWord.toUpperCase()));
+    } else if (state.status == GameHangmanStatus.over) {
+      if (state.gameWon == false) {
+        return emit(state.copyWith(
           status: GameHangmanStatus.playing,
-          word: event.choosenWord.toUpperCase()));
+          word: randomWord.toUpperCase(),
+          currentScore: 0,
+          lettersPlayed: List.empty(),
+          lives: 6,
+          needToWin: 0,
+          totalScore: 0,
+          lastPlayGood: false,
+        ));
+      }
     }
   }
 
@@ -40,7 +63,6 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
 
       if (lives <= 0) {
         emit(state.copyWith(
-          status: GameHangmanStatus.over,
           lettersPlayed: lettersPlayed,
           lives: lives,
           lastPlayGood: lastPlayGood,
@@ -57,7 +79,6 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
         roundScore += 100;
         var totalScore = state.totalScore + roundScore;
         emit(state.copyWith(
-            status: GameHangmanStatus.over,
             lettersPlayed: lettersPlayed,
             gameWon: true,
             needToWin: found,
@@ -73,5 +94,10 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
         lives: lives,
         lastPlayGood: lastPlayGood,
         currentScore: roundScore));
+  }
+
+  FutureOr<void> _onGameHangmanOver(
+      GameHangmanGameOver event, Emitter<GameHangmanState> emit) {
+    emit(state.copyWith(status: GameHangmanStatus.over));
   }
 }
