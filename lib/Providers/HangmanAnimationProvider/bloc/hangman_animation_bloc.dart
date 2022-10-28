@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 part 'hangman_animation_event.dart';
 part 'hangman_animation_state.dart';
 
-const throttleDuration = Duration(milliseconds: 100);
+const throttleDuration = Duration(seconds: 1);
 
 class HangmanAnimationBloc
     extends Bloc<HangmanAnimationEvent, HangmanAnimationState> {
@@ -22,13 +22,13 @@ class HangmanAnimationBloc
     );
   }
 
-  FutureOr<void> _onHangmanAnimationStarted(
+  void _onHangmanAnimationStarted(
       HangmanAnimationStarted event, Emitter<HangmanAnimationState> emit) {
-    emit(const HangmanAnimationInProgress(true));
+    emit( const HangmanAnimationInProgress(true));
   }
 
-  FutureOr<void> _onHangmanAnimationEnded(
+  void _onHangmanAnimationEnded(
       HangmanAnimationEnded event, Emitter<HangmanAnimationState> emit) {
-    emit(const HangmanAnimationInProgress(false));
+    return emit(const HangmanAnimationInProgress(false));
   }
 }

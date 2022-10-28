@@ -18,6 +18,4 @@ class GameHangmanPlayLetter extends GameHangmanEvent {
 
 class GameHangmanGameOver extends GameHangmanEvent {}
 
-class GameHangmanGameContinue extends GameHangmanEvent {
-  const GameHangmanGameContinue();
-}
+class GameHangmanGameRestart extends GameHangmanEvent {}

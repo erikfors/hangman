@@ -82,10 +82,7 @@ class MainOverScreen extends StatelessWidget {
                     //TODO start game over
                     context
                         .read<GameHangmanBloc>()
-                        .add(const GameHangmanGameStarted());
-                    context
-                        .read<HangmanAnimationBloc>()
-                        .add(HangmanAnimationStarted());
+                        .add(GameHangmanGameRestart());
                   },
                   child: const Text("Try Again"),
                 )
@@ -94,6 +91,9 @@ class MainOverScreen extends StatelessWidget {
                     //TODO save first
 
                     //TODO start with another word
+                      context
+                        .read<GameHangmanBloc>()
+                        .add(GameHangmanGameRestart());
                   },
                   child: const Text("Next Word!"),
                 ),

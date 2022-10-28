@@ -17,6 +17,7 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
     on<GameHangmanPlayLetter>(_onGameHangmanPlayLetter,
         transformer: throttle(throttleDuration));
     on<GameHangmanGameOver>(_onGameHangmanOver);
+    on<GameHangmanGameRestart>(_onGameHangmanRestarted);
   }
 
   void _onGameHangmanGameStarted(
@@ -26,19 +27,6 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
     if (state.status == GameHangmanStatus.initial) {
       return emit(state.copyWith(
           status: GameHangmanStatus.playing, word: randomWord.toUpperCase()));
-    } else if (state.status == GameHangmanStatus.over) {
-      if (state.gameWon == false) {
-        return emit(state.copyWith(
-          status: GameHangmanStatus.playing,
-          word: randomWord.toUpperCase(),
-          currentScore: 0,
-          lettersPlayed: List.empty(),
-          lives: 6,
-          needToWin: 0,
-          totalScore: 0,
-          lastPlayGood: false,
-        ));
-      }
     }
   }
 
@@ -99,5 +87,32 @@ class GameHangmanBloc extends Bloc<GameHangmanEvent, GameHangmanState> {
   FutureOr<void> _onGameHangmanOver(
       GameHangmanGameOver event, Emitter<GameHangmanState> emit) {
     emit(state.copyWith(status: GameHangmanStatus.over));
+  }
+
+  void _onGameHangmanRestarted(
+      GameHangmanGameRestart event, Emitter<GameHangmanState> emit) {
+    if (state.gameWon) {
+      return emit(state.copyWith(
+        status: GameHangmanStatus.initial,
+        word: "",
+        currentScore: 0,
+        lettersPlayed: List.empty(),
+        lives: 6,
+        needToWin: 0,
+        lastPlayGood: false,
+        gameWon: false,
+      ));
+    } else {
+      return emit(state.copyWith(
+        status: GameHangmanStatus.initial,
+        word: "",
+        currentScore: 0,
+        lettersPlayed: List.empty(),
+        lives: 6,
+        needToWin: 0,
+        totalScore: 0,
+        lastPlayGood: false,
+      ));
+    }
   }
 }

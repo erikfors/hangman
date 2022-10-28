@@ -52,6 +52,7 @@ class _HangmanAnimationState extends State<HangmanAnimation> {
                 context
                     .read<HangmanAnimationBloc>()
                     .add(HangmanAnimationEnded());
+
                 return Rive(
                   artboard: _hangmanArtboard!,
                 );

@@ -35,7 +35,6 @@ class GameHangmanState extends Equatable {
     bool? lastPlayGood,
     int? currentScore,
     int? totalScore,
-    String? lastPlayTime,
   }) {
     return GameHangmanState(
       status: status ?? this.status,
