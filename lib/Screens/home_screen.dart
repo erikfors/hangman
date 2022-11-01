@@ -1,23 +1,53 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hangman/Widgets/General/MyButton.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Hangman"),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            "lib/Assets/hangman_background.jpg",
+          ),
+          fit: BoxFit.cover,
+        ),
       ),
-      body: Center(child: ElevatedButton(
-  onPressed: () {
-      Beamer.of(context).beamToNamed("/game");
-  },
-  child: const Text("Start New Game"),
-)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MyButton(
+              onTap: () {
+                Beamer.of(context).beamToNamed("/game");
+              },
+              text: "Start New Game",
+            ),
+            const SizedBox(height: 30,),
+            MyButton(
+              onTap: () {
+                Beamer.of(context).beamToNamed("/game");
+              },
+              text: "View History",
+            ),
+             const SizedBox(height: 30,),
+            MyButton(
+              onTap: () {
+                Beamer.of(context).beamToNamed("/game");
+              },
+              text: "Settings",
+            ),
+          ],
+        )),
+      ),
     );
   }
 }
