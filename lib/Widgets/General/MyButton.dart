@@ -14,8 +14,10 @@ class MyButton extends StatelessWidget {
       color: Colors.green,
       child: Text(
         text,
-        style:
-            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

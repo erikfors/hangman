@@ -1,8 +1,5 @@
-import 'package:animated_button/animated_button.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hangman/Widgets/General/MyButton.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,34 +16,50 @@ class HomeScreen extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MyButton(
-              onTap: () {
-                Beamer.of(context).beamToNamed("/game");
-              },
-              text: "Start New Game",
-            ),
-            const SizedBox(height: 30,),
-            MyButton(
-              onTap: () {
-                Beamer.of(context).beamToNamed("/game");
-              },
-              text: "View History",
-            ),
-             const SizedBox(height: 30,),
-            MyButton(
-              onTap: () {
-                Beamer.of(context).beamToNamed("/game");
-              },
-              text: "Settings",
-            ),
-          ],
-        )),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 60,
+              ),
+              const Text(
+                "Hangman",
+                style: TextStyle(fontFamily: 'PennyTheCherryBombChalk', color: Colors.white,fontSize: 65),
+              ),
+               const SizedBox(
+                height:60,
+              ),
+              MyButton(
+                onTap: () {
+                  Beamer.of(context).beamToNamed("/game");
+                },
+                text: "Start New Game",
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              MyButton(
+                onTap: () {
+                  Beamer.of(context).beamToNamed("/game");
+                },
+                text: "View History",
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              MyButton(
+                onTap: () {
+                  Beamer.of(context).beamToNamed("/game");
+                },
+                text: "Settings",
+              ),
+            ],
+          )),
+        ),
       ),
     );
   }
