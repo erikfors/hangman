@@ -72,6 +72,7 @@ flutter:
   assets:
     - lib/Assets/hangman.riv
     - lib/Assets/hangman_background.jpg
+    - lib/Assets/button_raw.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -89,6 +90,9 @@ flutter:
     - family: PennyTheCherryBombChalk
       fonts:
         - asset: lib/Assets/Fonts/penny_the_cherry_bomb_chalk.ttf
+    - family: PennyTheCherryBombNormal
+      fonts:
+        - asset: lib/Assets/Fonts/penny_the_cherry_bomb_normal.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

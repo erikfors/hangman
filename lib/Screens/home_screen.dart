@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:hangman/Widgets/General/MyButton.dart';
+import 'package:hangman/Widgets/General/my_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,16 +28,10 @@ class HomeScreen extends StatelessWidget {
               ),
               const Text(
                 "Hangman",
-                style: TextStyle(fontFamily: 'PennyTheCherryBombChalk', color: Colors.white,fontSize: 65),
-              ),
-               const SizedBox(
-                height:60,
-              ),
-              MyButton(
-                onTap: () {
-                  Beamer.of(context).beamToNamed("/game");
-                },
-                text: "Start New Game",
+                style: TextStyle(
+                    fontFamily: 'PennyTheCherryBombChalk',
+                    color: Colors.white,
+                    fontSize: 65),
               ),
               const SizedBox(
                 height: 30,
@@ -46,7 +40,16 @@ class HomeScreen extends StatelessWidget {
                 onTap: () {
                   Beamer.of(context).beamToNamed("/game");
                 },
-                text: "View History",
+                text: "Play",
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              MyButton(
+                onTap: () {
+                  Beamer.of(context).beamToNamed("/game");
+                },
+                text: "History",
               ),
               const SizedBox(
                 height: 30,
